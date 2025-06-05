@@ -2,6 +2,7 @@
 A comprehensive FastAPI-based student management system with JWT authentication, CRUD operations, file upload functionality, and interactive API documentation.
 ✨ Features
 
+[swagger Ui link](http://localhost:8000/docs#/)
 🔐 JWT Authentication - Secure user registration and login
 👥 Student Management - Complete CRUD operations for student records
 📚 Academic Details - Manage college, department, graduation year, CGPA
