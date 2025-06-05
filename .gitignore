@@ -1,0 +1,10 @@
+# Create .gitignore file in your project root
+echo "venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+*.db
+.DS_Store
+*.log" > .gitignore
