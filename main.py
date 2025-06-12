@@ -33,7 +33,7 @@ ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 UPLOAD_DIR = "student_upload_files"
 
-# Ensure upload directory exists
+
 Path(UPLOAD_DIR).mkdir(exist_ok=True)
 
 
@@ -47,7 +47,7 @@ def get_database_url():
     if NEON_DB_URL:
         return NEON_DB_URL  
 
-    # Fallback to local PostgreSQL config
+    # local PostgreSQL config
     DB_USER = os.getenv("DB_USER", "postgres")
     DB_PASSWORD = os.getenv("DB_PASSWORD", "admin123")
     DB_HOST = os.getenv("DB_HOST", "localhost")
@@ -57,13 +57,12 @@ def get_database_url():
     encoded_password = quote_plus(DB_PASSWORD)
     return f"postgresql://{DB_USER}:{encoded_password}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
-# Final database URL
+# Final URL
 SQLALCHEMY_DATABASE_URL = get_database_url()
 
 # Create SQLAlchemy engine
 engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"sslmode": "require"}, pool_pre_ping=True,)
 
-# Session factory
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # Base class for models
@@ -177,7 +176,7 @@ class Token(BaseModel):
     
 #------------------------------------------------------------------------------------------------------# 
     
-# FastAPI App
+# FastAPI   
 app = FastAPI(
     title="Student Management API",
     description="Backend of student onboarding and tracking system",
@@ -335,7 +334,7 @@ async def search_students(
 ):
     """Search and filter students by college, graduation year, and department"""
     
-    # Start with base query, join AcademicDetails, and add eager loading
+    
     query = db.query(Student).join(AcademicDetails).options(
         joinedload(Student.academic_details),
         joinedload(Student.documents)
